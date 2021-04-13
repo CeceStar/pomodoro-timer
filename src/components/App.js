@@ -1,4 +1,5 @@
 import React from "react";
+import Timer from "./Timer";
 
 function App() {
   return (
@@ -6,9 +7,9 @@ function App() {
       <header className="App-header">
         
       </header>
-      <section class="pomodoro-timer-window">
+      <section className="pomodoro-timer-window">
       <h1>Time to study!</h1>
-      <p>this will help you study better, lets get started!</p>
+      <Timer />
       </section>
 
       <footer className="App-footer">
