@@ -8,6 +8,7 @@ function App() {
       </header>
       <section class="pomodoro-timer-window">
       <h1>Time to study!</h1>
+      <p>this will help you study better, lets get started!</p>
       </section>
 
       <footer className="App-footer">
