@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Asap:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Asap:wght@400;700&display=swap");
 
 :root {
-  --lightbg: #D9E1E4;
+  --lightbg: #d9e1e4;
   --lightbg-green: #d1e4cc;
-  --text-color: #2E2851;
+  --text-color: #2e2851;
   --text-color-darkgreen: #3b6a71;
-  --font-family: 'Asap', sans-serif;
+  --font-family: "Asap", sans-serif;
 }
 
 body {
   background-color: var(--lightbg);
   margin: 0 auto;
   font-family: var(--font-family);
-    color: var(--text-color)
+  color: var(--text-color);
 }
 
 h1 {
@@ -42,4 +42,34 @@ p {
 .pomodoro-timer-window {
   text-align: center;
   margin: 0 auto;
-} 
+}
+
+.countdown {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 3rem;
+  margin: 0px 20px;
+  align-self: bottom;
+}
+
+.countdown-area {
+  margin: 5vh 0vh;
+}
+
+.btn-change-time {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
+  font-size: 2rem;
+  margin: 0px 10px;
+}
+
+.btn-start-timer {
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  margin: 10px 10px;
+  padding: 10px 10px;
+}
