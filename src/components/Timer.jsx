@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Timer() {
   const [minutes, setMinutes] = useState(25);
-  const [seconds, setSeconds] = useState(10);
+  const [seconds, setSeconds] = useState(0);
+  const [isActive, setActive] = useState(false);
 
   function changeTime(event) {
     const name = event.target.name;
@@ -14,19 +15,38 @@ function Timer() {
     }
   }
 
-  function startTimer() {
-    const myInterval = setInterval(() => {
-        if (seconds > 0) {
-            setSeconds(seconds => seconds - 1)
-        } else if (seconds === 0){
-            setMinutes(minutes => minutes - 1)
-            setSeconds(59)
-        } else {
-            console.log("HEj")
-        }
-        
-    }, 1000)
+  function toggelStartStopTimer() {
+    setActive(!isActive);
   }
+
+  function resetTimer() {
+    setMinutes(25);
+    setSeconds(0);
+    setActive(false);
+  }
+
+  useEffect(() => {
+    let interval = null;
+    if (isActive) {
+      if (seconds < 0) {
+        setMinutes((minutes) => minutes - 1);
+        setSeconds(30);
+      } else if (minutes < 0) {
+        setMinutes(0);
+        setSeconds(0);
+        setActive(false);
+        console.log("Times up!");
+        clearInterval(interval);
+      } else {
+        interval = setInterval(() => {
+          setSeconds((seconds) => seconds - 1);
+        }, 1000);
+      }
+    } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds, minutes]);
 
   return (
     <>
@@ -50,9 +70,14 @@ function Timer() {
         </button>
       </div>
 
-      
-      <button name="start" onClick={startTimer} className="btn-start-timer">
-        Start timer
+      <button
+        name="start-pause"
+        onClick={toggelStartStopTimer}
+        className="btn-start-timer">
+        {isActive ? "Pause" : "Start"}
+      </button>
+      <button name="reset" onClick={resetTimer} className="btn-start-timer">
+        Reset
       </button>
     </>
   );
