@@ -32,9 +32,7 @@ function Timer() {
         setMinutes((minutes) => minutes - 1);
         setSeconds(30);
       } else if (minutes < 0) {
-        setMinutes(0);
-        setSeconds(0);
-        setActive(false);
+        resetTimer()
         console.log("Times up!");
         clearInterval(interval);
       } else {
