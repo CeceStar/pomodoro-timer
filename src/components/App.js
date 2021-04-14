@@ -8,7 +8,7 @@ function App() {
         
       </header>
       <section className="pomodoro-timer-window">
-      <h1>Time to study!</h1>
+
       <Timer />
       </section>
 

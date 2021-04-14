@@ -7,16 +7,11 @@ function Timer() {
 
   function changeTime(event) {
     const name = event.target.name;
-
     if (name === "add") {
       setMinutes(minutes + 1);
     } else if (name === "sub") {
       setMinutes(minutes - 1);
     }
-  }
-
-  function toggelStartStopTimer() {
-    setActive(!isActive);
   }
 
   function resetTimer() {
@@ -29,15 +24,15 @@ function Timer() {
     let interval = null;
     if (isActive) {
       if (seconds < 0) {
-        setMinutes((minutes) => minutes - 1);
-        setSeconds(30);
+        setMinutes(minutes - 1);
+        setSeconds(59);
       } else if (minutes < 0) {
         resetTimer()
         console.log("Times up!");
         clearInterval(interval);
       } else {
         interval = setInterval(() => {
-          setSeconds((seconds) => seconds - 1);
+          setSeconds(seconds - 1);
         }, 1000);
       }
     } else if (!isActive && seconds !== 0) {
@@ -49,6 +44,8 @@ function Timer() {
   return (
     <>
       <div className="countdown-area">
+      <h1>{isActive ? "Time to study" : "Let's start this session"}</h1>
+    <p className="smaller-paragrahp">{!isActive && `The timer is ready for you. You can add time or subract to fit your needs. The default settings are 25 minutes then 5 minutes break.`}</p>
         <button
           name="add"
           onClick={changeTime}
@@ -70,7 +67,7 @@ function Timer() {
 
       <button
         name="start-pause"
-        onClick={toggelStartStopTimer}
+        onClick={() => {setActive(!isActive)}}
         className="btn-start-timer">
         {isActive ? "Pause" : "Start"}
       </button>
