@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Popup from "./Popup";
 
 function Timer() {
   const [minutes, setMinutes] = useState(25);
@@ -45,21 +46,7 @@ function Timer() {
   return (
     <>
       <div className="countdown-area">
-        <div
-          class={isBreakTime ? "dialog" : "dialog hidden"}
-          role="dialog"
-          aria-labelledby="dialog-title"
-          aria-describedby="dialog-description">
-          <h2 id="dialog-title">Time is up!</h2>
-          <p id="dialog-description">Time to take a 5 minutes break.</p>
-          <button
-            type="button"
-            aria-label="Close dialog"
-            class="close-dialog"
-            onClick={() => (setIsBreakTime(false))}>
-            <i class="fa fa-times"></i>
-          </button>
-        </div>
+        <Popup isBreakTime={isBreakTime} setIsBreakTime={setIsBreakTime} />
 
         <h1>{isActive ? "Time to study!" : "Let's start this session"}</h1>
         <p className="smaller-paragrahp">
