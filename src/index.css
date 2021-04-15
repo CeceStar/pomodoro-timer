@@ -54,6 +54,7 @@ p {
 
 .countdown-area {
   margin: 5vh 0vh;
+  position: relative;
 }
 
 .btn-change-time {
@@ -78,4 +79,20 @@ p {
   width: 40vw;
   margin: 0 auto;
   padding-bottom: 5vh;
+}
+
+
+.dialog {
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  background-color: var(--lightbg-green);
+  width: 40vw;
+  border-radius: 20px;
+  border: 1px solid var(--text-color);
+  padding: 20px 0px 40px 0px;
+}
+
+.hidden {
+  display: none;
 }

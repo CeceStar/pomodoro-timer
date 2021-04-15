@@ -4,17 +4,12 @@ import Timer from "./Timer";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        
-      </header>
+      <header className="App-header"></header>
       <section className="pomodoro-timer-window">
-
-      <Timer />
+        <Timer />
       </section>
 
-      <footer className="App-footer">
-
-      </footer>
+      <footer className="App-footer"></footer>
     </div>
   );
 }
