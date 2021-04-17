@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-function FocusTimer({ setTimeToFocus, setIsBreakTime, setTimeIsUp, firstTime, setFirstTime }) {
+function FocusTimer({
+  setTimeToFocus,
+  setIsBreakTime,
+  setTimeIsUp,
+  firstTime,
+  setFirstTime,
+}) {
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setActive] = useState(false);
-  
 
   function changeTime(event) {
     const name = event.target.name;
@@ -16,7 +21,10 @@ function FocusTimer({ setTimeToFocus, setIsBreakTime, setTimeIsUp, firstTime, se
   }
 
   function resetTimer() {
-    return setMinutes(25), setSeconds(0), setActive(false), setFirstTime(true);
+    setMinutes(25);
+    setSeconds(0);
+    setActive(false);
+    setFirstTime(true);
   }
 
   useEffect(() => {
@@ -52,7 +60,8 @@ function FocusTimer({ setTimeToFocus, setIsBreakTime, setTimeIsUp, firstTime, se
         +
       </button>
       <p className="countdown">
-        {minutes} : {seconds < 10 ? `0${seconds}` : seconds}
+        {minutes < 10 ? `0${minutes}` : minutes} :{" "}
+        {seconds < 10 ? `0${seconds}` : seconds}
       </p>
       <button
         name="sub"

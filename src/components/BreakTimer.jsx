@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Popup from "./Popup";
 
-function FocusTimer({timeToFocus, setTimeToFocus, setTimeIsUp}) {
+function FocusTimer({ timeToFocus, setTimeToFocus, setTimeIsUp }) {
   const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setActive] = useState(false);
@@ -17,11 +17,9 @@ function FocusTimer({timeToFocus, setTimeToFocus, setTimeIsUp}) {
   }
 
   function resetTimer() {
-      return (
-    setMinutes(5),
-    setSeconds(0),
-    setActive(false)
-      )
+    setMinutes(5);
+    setSeconds(0);
+    setActive(false);
   }
 
   useEffect(() => {
@@ -31,9 +29,9 @@ function FocusTimer({timeToFocus, setTimeToFocus, setTimeIsUp}) {
         setMinutes(minutes - 1);
         setSeconds(10);
       } else if (minutes < 0) {
-        setTimeToFocus(true)
-        setIsBreakTime(false)
-        setTimeIsUp(true)
+        setTimeToFocus(true);
+        setIsBreakTime(false);
+        setTimeIsUp(true);
         clearInterval(interval);
       } else {
         interval = setInterval(() => {
@@ -50,7 +48,11 @@ function FocusTimer({timeToFocus, setTimeToFocus, setTimeIsUp}) {
     <>
       <Popup isBreakTime={isBreakTime} setIsBreakTime={setIsBreakTime} />
 
-      <h1>{isActive ? "Get up and take a break" : "Time to relax and take a break"}</h1>
+      <h1>
+        {isActive
+          ? "Get up and take a break"
+          : "Time to relax and take a break"}
+      </h1>
       <button
         name="add"
         onClick={changeTime}
@@ -59,7 +61,8 @@ function FocusTimer({timeToFocus, setTimeToFocus, setTimeIsUp}) {
         +
       </button>
       <p className="countdown">
-        {minutes} : {seconds < 10 ? `0${seconds}` : seconds}
+        {minutes < 10 ? `0${minutes}` : minutes} :{" "}
+        {seconds < 10 ? `0${seconds}` : seconds}
       </p>
       <button
         name="sub"
@@ -77,10 +80,7 @@ function FocusTimer({timeToFocus, setTimeToFocus, setTimeIsUp}) {
           className="btn-start-timer">
           {isActive ? "Pause" : "Start"}
         </button>
-        <button
-          name="reset"
-          onClick={resetTimer}
-          className="btn-start-timer">
+        <button name="reset" onClick={resetTimer} className="btn-start-timer">
           Reset
         </button>
       </div>
