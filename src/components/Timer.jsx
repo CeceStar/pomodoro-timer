@@ -1,89 +1,60 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import FocusTimer from "./FocusTimer";
+import BreakTimer from "./BreakTimer";
 import Popup from "./Popup";
+import IntroText from "./IntroText";
 
 function Timer() {
-  const [minutes, setMinutes] = useState(25);
-  const [seconds, setSeconds] = useState(0);
-  const [isActive, setActive] = useState(false);
+  const [timeToFocus, setTimeToFocus] = useState(true);
   const [isBreakTime, setIsBreakTime] = useState(false);
+  const [timeIsUp, setTimeIsUp] = useState(false);
+  const [firstTime, setFirstTime] = useState(true);
 
-  function changeTime(event) {
-    const name = event.target.name;
-    if (name === "add") {
-      setMinutes(minutes + 1);
-    } else if (name === "sub") {
-      setMinutes(minutes - 1);
+  const renderTimer = () => {
+    if (timeToFocus) {
+      return (
+        <FocusTimer
+          timeToFocus={timeToFocus}
+          setTimeToFocus={setTimeToFocus}
+          isBreakTime={isBreakTime}
+          setIsBreakTime={setIsBreakTime}
+          timeIsUp={timeIsUp}
+          setTimeIsUp={setTimeIsUp}
+          firstTime={firstTime}
+          setFirstTime={setFirstTime}
+        />
+      );
+    } else {
+      return (
+        <BreakTimer
+          timeToFocus={timeToFocus}
+          setTimeToFocus={setTimeToFocus}
+          isBreakTime={isBreakTime}
+          setIsBreakTime={setIsBreakTime}
+          timeIsUp={timeIsUp}
+          setTimeIsUp={setTimeIsUp}
+        />
+      );
     }
-  }
+  };
 
-  function resetTimer() {
-    setMinutes(25);
-    setSeconds(0);
-    setActive(false);
-  }
-
-  useEffect(() => {
-    let interval = null;
-    if (isActive) {
-      if (seconds < 0) {
-        setMinutes(minutes - 1);
-        setSeconds(30);
-      } else if (minutes < 0) {
-        resetTimer();
-        setIsBreakTime(true);
-        clearInterval(interval);
-      } else {
-        interval = setInterval(() => {
-          setSeconds(seconds - 1);
-        }, 1000);
-      }
-    } else if (!isActive && seconds !== 0) {
-      clearInterval(interval);
+  const introText = () => {
+    if (firstTime) {
+      return <IntroText />;
     }
-    return () => clearInterval(interval);
-  }, [isActive, seconds, minutes]);
+  };
 
   return (
-    <>
-      <div className="countdown-area">
-        <Popup isBreakTime={isBreakTime} setIsBreakTime={setIsBreakTime} />
-
-        <h1>{isActive ? "Time to study!" : "Let's start this session"}</h1>
-        <p className="smaller-paragrahp">
-          {!isActive &&
-            `The timer is ready for you. You can add time or subract to fit your needs. The default settings are 25 minutes then 5 minutes break.`}
-        </p>
-        <button
-          name="add"
-          onClick={changeTime}
-          className="btn-change-time"
-          aria-label="Add minutes">
-          +
-        </button>
-        <p className="countdown">
-          {minutes} : {seconds < 10 ? `0${seconds}` : seconds}
-        </p>
-        <button
-          name="sub"
-          onClick={changeTime}
-          className="btn-change-time"
-          aria-label="Subtract minutes">
-          -
-        </button>
-      </div>
-
-      <button
-        name="start-pause"
-        onClick={() => {
-          setActive(!isActive);
-        }}
-        className="btn-start-timer">
-        {isActive ? "Pause" : "Start"}
-      </button>
-      <button name="reset" onClick={resetTimer} className="btn-start-timer">
-        Reset
-      </button>
-    </>
+    <div className="countdown-area">
+      {introText()}
+      <Popup
+        isBreakTime={isBreakTime}
+        setIsBreakTime={setIsBreakTime}
+        timeIsUp={timeIsUp}
+        setTimeIsUp={setTimeIsUp}
+      />
+      {renderTimer()}
+    </div>
   );
 }
 
