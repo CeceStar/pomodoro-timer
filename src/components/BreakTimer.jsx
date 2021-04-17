@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Popup from "./Popup";
 
-function FocusTimer({timeToFocus, setTimeToFocus}) {
+function FocusTimer({timeToFocus, setTimeToFocus, setTimeIsUp}) {
   const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setActive] = useState(false);
@@ -31,8 +31,9 @@ function FocusTimer({timeToFocus, setTimeToFocus}) {
         setMinutes(minutes - 1);
         setSeconds(10);
       } else if (minutes < 0) {
-        setIsBreakTime(true)
         setTimeToFocus(true)
+        setIsBreakTime(false)
+        setTimeIsUp(true)
         clearInterval(interval);
       } else {
         interval = setInterval(() => {
@@ -43,7 +44,7 @@ function FocusTimer({timeToFocus, setTimeToFocus}) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, seconds, minutes, setTimeToFocus]);
+  }, [isActive, seconds, minutes, setTimeToFocus, setTimeIsUp]);
 
   return (
     <>

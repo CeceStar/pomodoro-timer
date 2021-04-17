@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Popup from "./Popup";
 
-function FocusTimer({timeToFocus, setTimeToFocus}) {
+function FocusTimer({ setTimeToFocus, setIsBreakTime, setTimeIsUp, firstTime, setFirstTime }) {
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setActive] = useState(false);
-  const [isBreakTime, setIsBreakTime] = useState(false);
+  
 
   function changeTime(event) {
     const name = event.target.name;
@@ -17,11 +16,7 @@ function FocusTimer({timeToFocus, setTimeToFocus}) {
   }
 
   function resetTimer() {
-      return (
-    setMinutes(25),
-    setSeconds(0),
-    setActive(false)
-      )
+    return setMinutes(25), setSeconds(0), setActive(false), setFirstTime(true);
   }
 
   useEffect(() => {
@@ -31,8 +26,9 @@ function FocusTimer({timeToFocus, setTimeToFocus}) {
         setMinutes(minutes - 1);
         setSeconds(10);
       } else if (minutes < 0) {
-        setIsBreakTime(true)
-        setTimeToFocus(false)
+        setTimeToFocus(false);
+        setIsBreakTime(true);
+        setTimeIsUp(true);
         clearInterval(interval);
       } else {
         interval = setInterval(() => {
@@ -43,17 +39,11 @@ function FocusTimer({timeToFocus, setTimeToFocus}) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, seconds, minutes, setTimeToFocus]);
+  }, [isActive, seconds, minutes, setTimeToFocus, setIsBreakTime, setTimeIsUp]);
 
   return (
     <>
-      <Popup isBreakTime={isBreakTime} setIsBreakTime={setIsBreakTime} />
-
-      <h1>{isActive ? "Time to focus!" : "Let's start this session"}</h1>
-      <p className="smaller-paragrahp">
-        {!isActive &&
-          `The timer is ready for you. You can add time or subract to fit your needs. The default settings are 25 minutes then 5 minutes break.`}
-      </p>
+      <h1>{firstTime ? null : "Time to focus!"}</h1>
       <button
         name="add"
         onClick={changeTime}
@@ -76,14 +66,12 @@ function FocusTimer({timeToFocus, setTimeToFocus}) {
           name="start-pause"
           onClick={() => {
             setActive(!isActive);
+            setFirstTime(false);
           }}
           className="btn-start-timer">
           {isActive ? "Pause" : "Start"}
         </button>
-        <button
-          name="reset"
-          onClick={resetTimer}
-          className="btn-start-timer">
+        <button name="reset" onClick={resetTimer} className="btn-start-timer">
           Reset
         </button>
       </div>
