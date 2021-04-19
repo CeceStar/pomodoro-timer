@@ -10,9 +10,8 @@ function Countdown({
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setActive] = useState(false);
-  const [alarmSound] = useState(
-    new Audio("http://soundbible.com/grab.php?id=2189&type=mp3")
-  );
+  const alarmSound =
+    new Audio("http://soundbible.com/grab.php?id=2189&type=mp3");
 
   function changeTime(event) {
     const name = event.target.name;
