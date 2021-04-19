@@ -8,16 +8,17 @@ function Popup({ isBreakTime, setIsBreakTime, timeIsUp, setTimeIsUp }) {
       aria-labelledby="dialog-title"
       aria-describedby="dialog-description">
       <h2 id="dialog-title">Time is up!</h2>
-      <p id="dialog-description">{isBreakTime ? "Time to take a 5 minutes break." : "Time to refocus."}</p>
+      <p id="dialog-description">
+        {isBreakTime ? "Time to take a 5 minutes break." : "Time to refocus."}
+      </p>
       <button
         type="button"
-        aria-label="Close dialog"
         class="close-dialog"
         onClick={() => {
           setIsBreakTime(false);
           setTimeIsUp(false);
         }}>
-        <i class="fa fa-times"></i>
+        Close
       </button>
     </div>
   );
