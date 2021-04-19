@@ -45,7 +45,7 @@ function FocusTimer({ timeToFocus, setTimeToFocus, setTimeIsUp }) {
 
   return (
     <>
-      <h1>Time to relax and take a break</h1>
+      <h1>Time to take a break</h1>
       <button
         name="add"
         onClick={changeTime}
