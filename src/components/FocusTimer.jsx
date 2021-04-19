@@ -51,7 +51,7 @@ function FocusTimer({
 
   return (
     <>
-      <h2>{firstTime ? null : "Time to focus"}</h2>
+      <h1>{firstTime ? null : "Time to focus"}</h1>
       <button
         name="add"
         onClick={changeTime}
