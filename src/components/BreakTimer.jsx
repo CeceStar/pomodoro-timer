@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-function FocusTimer({ timeToFocus, setTimeToFocus, setTimeIsUp }) {
+function FocusTimer({setTimeToFocus, setTimeIsUp, setIsBreakTime }) {
   const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setActive] = useState(false);
-  const [isBreakTime, setIsBreakTime] = useState(false);
 
   function changeTime(event) {
     const name = event.target.name;
@@ -41,7 +40,7 @@ function FocusTimer({ timeToFocus, setTimeToFocus, setTimeIsUp }) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, seconds, minutes, setTimeToFocus, setTimeIsUp]);
+  }, [isActive, seconds, minutes, setTimeToFocus, setTimeIsUp, setIsBreakTime]);
 
   return (
     <>
