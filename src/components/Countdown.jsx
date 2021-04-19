@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-function FocusTimer({
-  setTimeToFocus,
+function Countdown({
+  isBreakTime,
   setIsBreakTime,
   setTimeIsUp,
   firstTime,
@@ -10,6 +10,9 @@ function FocusTimer({
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setActive] = useState(false);
+  const [alarmSound] = useState(
+    new Audio("http://soundbible.com/grab.php?id=2189&type=mp3")
+  );
 
   function changeTime(event) {
     const name = event.target.name;
@@ -21,10 +24,10 @@ function FocusTimer({
   }
 
   function resetTimer() {
-    setMinutes(25);
-    setSeconds(0);
     setActive(false);
     setFirstTime(true);
+    setSeconds(0);
+    setMinutes(25);
   }
 
   useEffect(() => {
@@ -33,10 +36,19 @@ function FocusTimer({
       if (seconds < 0) {
         setMinutes(minutes - 1);
         setSeconds(10);
-      } else if (minutes < 0) {
-        setTimeToFocus(false);
-        setIsBreakTime(true);
+      }
+      if (minutes < 0) {
         setTimeIsUp(true);
+        setActive(false);
+        setSeconds(0);
+        alarmSound.play();
+        if (isBreakTime) {
+          setIsBreakTime(false);
+          setMinutes(25);
+        } else {
+          setIsBreakTime(true);
+          setMinutes(5);
+        }
         clearInterval(interval);
       } else {
         interval = setInterval(() => {
@@ -47,11 +59,27 @@ function FocusTimer({
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, seconds, minutes, setTimeToFocus, setIsBreakTime, setTimeIsUp]);
+  }, [
+    isActive,
+    seconds,
+    minutes,
+    isBreakTime,
+    setIsBreakTime,
+    setTimeIsUp,
+    alarmSound,
+  ]);
+
+  const textAboveTimer = () => {
+    if (firstTime) {
+      return;
+    } else {
+      return <h1>{isBreakTime ? "Time to have a break" : "Time to focus"}</h1>;
+    }
+  };
 
   return (
     <>
-      <h1>{firstTime ? null : "Time to focus"}</h1>
+      {textAboveTimer()}
       <button
         name="add"
         onClick={changeTime}
@@ -88,4 +116,4 @@ function FocusTimer({
   );
 }
 
-export default FocusTimer;
+export default Countdown;
