@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Popup from "./Popup";
 
 function FocusTimer({ timeToFocus, setTimeToFocus, setTimeIsUp }) {
   const [minutes, setMinutes] = useState(5);
@@ -46,7 +45,6 @@ function FocusTimer({ timeToFocus, setTimeToFocus, setTimeIsUp }) {
 
   return (
     <>
-      <Popup isBreakTime={isBreakTime} setIsBreakTime={setIsBreakTime} />
       <h1>Time to relax and take a break</h1>
       <button
         name="add"
