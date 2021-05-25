@@ -8,7 +8,6 @@ function App() {
       <section className="pomodoro-timer-window">
         <Timer />
       </section>
-
       <footer className="App-footer"></footer>
     </div>
   );

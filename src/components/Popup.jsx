@@ -1,6 +1,8 @@
 import React from "react";
 
-function Popup({ isBreakTime, setIsBreakTime, timeIsUp, setTimeIsUp }) {
+function Popup({ isBreakTime, timeIsUp, setTimeIsUp }) {
+  
+
   return (
     <div
       class={timeIsUp ? "dialog" : "dialog hidden"}
@@ -15,7 +17,6 @@ function Popup({ isBreakTime, setIsBreakTime, timeIsUp, setTimeIsUp }) {
         type="button"
         class="close-dialog"
         onClick={() => {
-          setIsBreakTime(false);
           setTimeIsUp(false);
         }}>
         Close
