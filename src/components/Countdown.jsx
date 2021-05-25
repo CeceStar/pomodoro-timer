@@ -34,7 +34,7 @@ function Countdown({
     if (isActive) {
       if (seconds < 0) {
         setMinutes(minutes - 1);
-        setSeconds(10);
+        setSeconds(59);
       }
       if (minutes < 0) {
         setTimeIsUp(true);
