@@ -1,5 +1,5 @@
 # Pomodoro Timer - a React Project 
-### (Brief 9 *(The first app - Pomodoro timer*)
+### (Brief 9 *The first app - Pomodoro timer*)
 
 This project was created with [Create React App](https://github.com/facebook/create-react-app).
 
